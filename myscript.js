@@ -119,37 +119,29 @@ const taskList = new TaskList(); // Creates an instance of class BookList. Sets 
 
 // END: CREATE NEW TASK //
 
-// START: ADD OBJECT TO ARRAY - adding a new task //
-// Display tasks
-// --> refactored code and removed this
-// function addTaskToWebpage() {
-//   let listOfCards = document.querySelector("#listOfCards");
-//   const displayHtml = taskList.displayListHtml();
-//   let range = document.createRange();
-//   let documentFragment = range.createContextualFragment(displayHtml);
-//   // attach delete event listener
-//   documentFragment
-//     .querySelector("button.delete")
-//     .addEventListener("click", deleteTask);
-//   documentFragment
-//     .querySelector("button.edit")
-//     .addEventListener("click", openEditModal);
-//   listOfCards.appendChild(documentFragment);
-// }
-// END: ADD OBJECT TO ARRAY - adding a new task //
+sortTasksDropdown = document.querySelector("#sortTasksDropdown");
+let sortTasksDropdownValue = sortTasksDropdown.value;
+sortTasksDropdown.onchange = function () {
+  // alert(sortTasksDropdown.value);
+  sortTasksDropdownValue = sortTasksDropdown.value;
+  //alert(`new tfiler ${taskFilterValue}`);
+  displayAllTasksFromStorage(sortTasksDropdownValue);
+};
 
 // START: DISPLAY TASKS FROM STORAGE ON WEB PAGE LOAD //
 
-displayAllTasksFromStorage();
+displayAllTasksFromStorage(sortTasksDropdownValue);
 // Display all task froms storage
-function displayAllTasksFromStorage() {
+function displayAllTasksFromStorage(sortTasksDropdownValue) {
+  let tSortValue = sortTasksDropdownValue || "To Do";
   let mynewtasks =
     JSON.parse(window.localStorage.getItem("mytasks")) || taskList.tasks;
   let displayAllHtml = "";
   if (mynewtasks) {
     listOfCards.innerHTML = "";
     for (let i = 0; i < mynewtasks.length; i++) {
-      displayAllHtml = `<div id="taskRow_${mynewtasks[i].id}" class="row cardTask mx-0 my-1 ">
+      if (mynewtasks[i].status == tSortValue) {
+        displayAllHtml = `<div id="taskRow_${mynewtasks[i].id}" class="row cardTask mx-0 my-1 ">
 <div class="col-sm-8 pl-0 pr-3">     
 <li class="list-group-item" id="taskCard">${mynewtasks[i].taskName}
 <div id="demo_${mynewtasks[i].id}" class="collapse">
@@ -172,18 +164,19 @@ function displayAllTasksFromStorage() {
 </li> 
 </div>
 </div> `;
-      let listOfCards = document.querySelector("#listOfCards");
-      let range = document.createRange();
-      let documentFragment = range.createContextualFragment(displayAllHtml);
-      // local storage attach delete event listener
-      documentFragment
-        .querySelector("button.delete")
-        .addEventListener("click", deleteTask);
-      // local storage attach edit event listener
-      documentFragment
-        .querySelector("button.edit")
-        .addEventListener("click", openEditModal);
-      listOfCards.appendChild(documentFragment);
+        let listOfCards = document.querySelector("#listOfCards");
+        let range = document.createRange();
+        let documentFragment = range.createContextualFragment(displayAllHtml);
+        // local storage attach delete event listener
+        documentFragment
+          .querySelector("button.delete")
+          .addEventListener("click", deleteTask);
+        // local storage attach edit event listener
+        documentFragment
+          .querySelector("button.edit")
+          .addEventListener("click", openEditModal);
+        listOfCards.appendChild(documentFragment);
+      }
     }
   }
 }
@@ -276,7 +269,7 @@ btnEditUpdate.onclick = function () {
     );
     $("#modalEdit").modal("hide"); // hides the modal once data filled out
     // displayUpdatedTask(u_id);
-    displayAllTasksFromStorage();
+    displayAllTasksFromStorage(sortTasksDropdownValue);
   }
 };
 
@@ -341,7 +334,7 @@ function deleteTask() {
   // let task_row = `#taskRow_${retreiveId}`;
   // var tRow = document.querySelector(task_row);
   // tRow.parentNode.removeChild(tRow);
-  displayAllTasksFromStorage();
+  displayAllTasksFromStorage(sortTasksDropdownValue);
 }
 
 // END: DELETE TASK //
@@ -403,7 +396,7 @@ btnAddTaskSave.onclick = function () {
     );
     $("#modalAdd").modal("hide"); // hides the modal once data filled out
     // addTaskToWebpage(); //called the display function (from function addTaskToWebpage() {)
-    displayAllTasksFromStorage();
+    displayAllTasksFromStorage(sortTasksDropdownValue);
   }
 };
 
@@ -512,3 +505,15 @@ const today = new Date();
 dateElement.innerHTML = today.toLocaleDateString("en-US", options);
 
 // END: SHOW TODAY's DATE IN NAVBAR //
+
+let calc = document.querySelector("#calc-contain");
+calc.style.display = "none";
+
+function calcAppear() {
+  // alert("calc");
+  if (calc.style.display === "none") {
+    calc.style.display = "block";
+  } else {
+    calc.style.display = "none";
+  }
+}
