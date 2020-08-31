@@ -133,14 +133,14 @@ sortTasksDropdown.onchange = function () {
 displayAllTasksFromStorage(sortTasksDropdownValue);
 // Display all task froms storage
 function displayAllTasksFromStorage(sortTasksDropdownValue) {
-  let tSortValue = sortTasksDropdownValue || "To Do";
+  let tSortValue = sortTasksDropdownValue || "To-Do";
   let mynewtasks =
     JSON.parse(window.localStorage.getItem("mytasks")) || taskList.tasks;
   let displayAllHtml = "";
   if (mynewtasks) {
     listOfCards.innerHTML = "";
     for (let i = 0; i < mynewtasks.length; i++) {
-      if (mynewtasks[i].status == tSortValue) {
+      if (mynewtasks[i].status.match(tSortValue)) {
         displayAllHtml = `<div id="taskRow_${mynewtasks[i].id}" class="row cardTask mx-0 my-1 ">
 <div class="col-sm-8 pl-0 pr-3">     
 <li class="list-group-item" id="taskCard">${mynewtasks[i].taskName}
@@ -199,9 +199,9 @@ function openEditModal() {
       // alert("in edit");
       document.querySelector("#editTaskName").value = taskArr[i].taskName;
       document.querySelector("#editAssignee").value = taskArr[i].assignee;
+      document.querySelector("#editTaskStatus").value = taskArr[i].status;
       document.querySelector("#editTaskDescription").value =
         taskArr[i].description;
-      document.querySelector("#editTaskStatus").value = taskArr[i].status;
       document.querySelector("#editDueDate").value = taskArr[i].dueDate;
       break;
     }
