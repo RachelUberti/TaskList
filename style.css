@@ -60,6 +60,23 @@
   float: left;
 }
 
+#sortTasks {
+  text-align: left;
+  border: none;
+  color: rgb(83, 83, 83);
+  border-radius: 0;
+  font-size: 14px;
+  padding: 10px 10px 10px 30px;
+}
+
+#sortTasksDropdown {
+  text-align: left;
+  border-color: rgba(0, 0, 0, 0.125);
+  color: rgb(83, 83, 83);
+  border-radius: 1px;
+  font-size: 14px;
+}
+
 #taskCard {
   border: none;
   padding: 2px;
