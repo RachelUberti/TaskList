@@ -434,9 +434,17 @@ section {
     padding: 8px 35px;
   }
 
+  .card-deck {
+    padding-left: 55px;
+  }
+
   #calc-contain {
     float: right;
     max-width: 300px;
+  }
+
+  #taskRow {
+    max-height: 3px;
   }
 }
 
@@ -468,13 +476,17 @@ section {
     float: none;
   }
 
-  #calc-contain {
-    float: left;
-    margin: 20px 120px;
+  .card-deck {
+    padding-left: 15px;
   }
 
-  .card-deck {
-    padding-left: 55px;
+  #calc-contain {
+    float: left;
+    margin: 20px 0px 40px 85px;
+  }
+
+  #taskRow {
+    max-height: 3px;
   }
 }
 /* --- END FOOTER --- */
