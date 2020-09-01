@@ -60,7 +60,7 @@
 <div class="card-deck mx-auto my-sm-3">
   <div class="card my-4">
     <div id="newListFormInput" class="card-header">
-      <button id="addNewListBtn" type="button" class="btn btn-md" data-toggle="modal" data-target="#">New List<i id="faplus" class="fa fa-plus"></i></button> 
+      <button id="addNewListBtn" type="button" class="btn btn-md" data-toggle="modal" data-target="#" onclick="secListAppear()"><i id="faplus" class="fa fa-plus"></i>New List</button> 
       </div>    
   </div>
   </div>
@@ -149,6 +149,47 @@
   </div>
   </div>
   <!-- END FIRST LIST -->
+
+    <!-- START SECOND LIST -->
+    <div id="secondList" class="card-deck mx-auto my-sm-3">
+      <!-- START header -->
+    <div id="newListHtml" class="card my-4">
+      <div class="card-header">
+        <div class="form-horizontal">
+        <form class="form-inline cardHeaderInline">    
+        <input id="listTitle" class="form-control mr-sm-4 col-sm-9" type="text" placeholder="Enter List Title">
+              <button id="addTaskBugSm" type="button" class="addTaskBug btn my-2 col-sm-2" data-toggle="modal"><i class="fa fa-bug"></i></button>     
+    </form>
+  </div>
+      <!-- END header -->
+    <!-- START Body - List of tasks -->
+      </div>
+      <div>
+        <label id="sortTasks" for="sortTasks">Sort tasks by status:</label>
+  <select name="sortTasksDropdown" id="sortTasksDropdown">
+    <option value=".*">All</option>
+    <option value="To-do">To-do</option>
+    <option value="Doing">Doing</option>
+    <option value="Done">Done</option>
+  </select>
+      </div>
+      <div class="card-body">
+              <ul id="listOfCards" class="list-group">
+        </ul>
+      </p>
+    </div>
+    <!-- END of Tasks in body --> 
+    <!-- START Card footer that has Add Task Button -->    
+    <div class="card-footer">
+      <form class="form-inline my-2 my-lg-0">
+          <button id="addTaskBugLg" type="button" class="addTaskBug btn btn-block my-2 my-sm-0" data-toggle="modal"><i class="fa fa-bug"></i> Add Task</button>     
+        </form>
+    </div>
+    </div>
+    <!-- END Card footer & End first (card) List -->    
+    </div>
+    </div>
+      <!-- END SECOND LIST -->
 
 <!-- END CARD DECK -->
 

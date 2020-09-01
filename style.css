@@ -43,6 +43,34 @@
 }
 /* --- END NAVBAR --- */
 
+/* --- ADD NEW LIST --- */
+
+#newListFormInput {
+  text-align: left;
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.125) !important;
+  font-weight: bold;
+  padding: 17px 20px;
+}
+
+#addNewListBtn {
+  background: rgba(209, 126, 30, 0.795);
+  border: none;
+  color: rgb(83, 83, 83);
+  font-size: 20px;
+}
+
+#faplus {
+  font-size: 16px;
+  color: rgb(83, 83, 83);
+  padding-right: 10px;
+}
+
+/* --- END ADD NEW LIST --- */
+
 /* --- CARDS --- */
 
 #listTitle {
@@ -115,35 +143,6 @@
 .btn.trash {
   background: rgb(158, 155, 155);
   border: none;
-}
-
-#newListFormInput {
-  text-align: left;
-  border: none;
-  border-radius: 0.25rem;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  background-color: rgba(0, 0, 0, 0.125) !important;
-  font-weight: bold;
-  padding: 20px;
-}
-
-#addNewListBtn {
-  background: rgba(209, 126, 30, 0.795);
-  border: none;
-  color: rgb(83, 83, 83);
-  font-size: 20px;
-  padding: 3px 12px;
-}
-
-.fa-plus {
-  padding-left: 10px;
-  color: black;
-}
-
-#faplus {
-  font-size: 16px;
-  color: rgb(83, 83, 83);
 }
 
 /* --- END CARDS --- */
@@ -248,6 +247,7 @@
   padding: 10px;
   box-shadow: 4px 0px 8px black inset;
 }
+
 /* --- END CALCULATOR --- */
 
 /* --- FOOTER --- */
@@ -433,6 +433,11 @@ section {
   .footer-distributed form button {
     padding: 8px 35px;
   }
+
+  #calc-contain {
+    float: right;
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -461,6 +466,15 @@ section {
 
   .footer-distributed form button {
     float: none;
+  }
+
+  #calc-contain {
+    float: left;
+    margin: 20px 120px;
+  }
+
+  .card-deck {
+    padding-left: 55px;
   }
 }
 /* --- END FOOTER --- */

@@ -515,3 +515,17 @@ function calcAppear() {
   }
 }
 // END: CALCULATOR HIDE & APPEAR FUNCTION
+
+// START: SECOND LIST HIDE & APPEAR FUNCTION
+let second = document.querySelector("#secondList");
+second.style.display = "none";
+
+function secListAppear() {
+  // alert("list");
+  if (second.style.display === "none") {
+    second.style.display = "block";
+  } else {
+    second.style.display = "none";
+  }
+}
+// END: SECOND LIST HIDE & APPEAR FUNCTION
