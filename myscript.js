@@ -460,6 +460,7 @@ function clearAllFields() {
   // alert(taskName);
   taskName.value = null;
   assignee.value = null;
+  taskStatus.value = "To-do";
   taskDescription.value = null;
   dueDate.value = null;
   taskNameErrMsg.innerHTML = "";
