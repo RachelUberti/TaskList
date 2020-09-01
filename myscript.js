@@ -137,19 +137,23 @@ function displayAllTasksFromStorage(sortTasksDropdownValue) {
   let mynewtasks =
     JSON.parse(window.localStorage.getItem("mytasks")) || taskList.tasks;
   let displayAllHtml = "";
+  let formatdate;
+  let datearr;
   if (mynewtasks) {
     listOfCards.innerHTML = "";
     for (let i = 0; i < mynewtasks.length; i++) {
       if (mynewtasks[i].status.match(tSortValue)) {
+        datearr = mynewtasks[i].dueDate.split("-"); // splits the date into an array
+        formatdate = `${datearr[2]}-${datearr[1]}-${datearr[0]}`; // re-arranges the array to show date first, then month and then year
         displayAllHtml = `<div id="taskRow_${mynewtasks[i].id}" class="row cardTask mx-0 my-1 ">
-<div class="col-sm-8 pl-0 pr-3">     
+<div id="taskRow" class="col-sm-8 pl-0 pr-3">     
 <li class="list-group-item" id="taskCard">${mynewtasks[i].taskName}
 <div id="demo_${mynewtasks[i].id}" class="collapse">
   <ul style="list-style-type:disc;">
   <li>Assignee: ${mynewtasks[i].assignee}</li>
   <li>Status: ${mynewtasks[i].status}</li>
   <li>Description: ${mynewtasks[i].description}</li>
-  <li>Due: ${mynewtasks[i].dueDate}</li>
+  <li>Due: ${formatdate}</li>
   </ul>
 </div> 
 </div>
@@ -330,10 +334,6 @@ function deleteTask() {
   // alert(retreiveId);
   taskList.deleteTask(retreiveId);
   // alert("d");
-  // Delete the list row from the ul
-  // let task_row = `#taskRow_${retreiveId}`;
-  // var tRow = document.querySelector(task_row);
-  // tRow.parentNode.removeChild(tRow);
   displayAllTasksFromStorage(sortTasksDropdownValue);
 }
 
@@ -401,7 +401,6 @@ btnAddTaskSave.onclick = function () {
 };
 
 // Once validation alerts users something is wrong, this changes feedback on a change of input
-
 //Task Name on change validation
 taskName.onchange = function () {
   if (taskName.value == "" || taskName.value.length < 8) {
@@ -478,9 +477,6 @@ function clearAllFields() {
 // declare variable
 let listTitle = document.querySelector("#listTitle");
 // declare variable for title entered by user
-// let listTitleVal =
-// JSON.parse(localStorage.getItem("listTitle")) ||
-// document.querySelector("#listTitle").value;
 document.querySelector("#listTitle").value = JSON.parse(
   localStorage.getItem("listTitle")
 );
@@ -491,7 +487,6 @@ listTitle.onchange = function () {
     "listTitle",
     JSON.stringify(document.querySelector("#listTitle").value)
   );
-  // localStorage.setItem("listTitle", JSON.stringify(listTitleVal));
   // alert(document.querySelector("#listTitle").value);
 };
 
@@ -506,6 +501,7 @@ dateElement.innerHTML = today.toLocaleDateString("en-US", options);
 
 // END: SHOW TODAY's DATE IN NAVBAR //
 
+// START: CALCULATOR HIDE & APPEAR FUNCTION
 let calc = document.querySelector("#calc-contain");
 calc.style.display = "none";
 
@@ -517,3 +513,4 @@ function calcAppear() {
     calc.style.display = "none";
   }
 }
+// END: CALCULATOR HIDE & APPEAR FUNCTION
