@@ -128,7 +128,7 @@ sortTasksDropdown.onchange = function () {
   displayAllTasksFromStorage(sortTasksDropdownValue);
 };
 
-// START: DISPLAY TASKS FROM STORAGE ON WEB PAGE LOAD //
+// START: DISPLAY TASKS FROM STORAGE ON WEB PAGE LOAD.. //
 
 displayAllTasksFromStorage(sortTasksDropdownValue);
 // Display all task froms storage
