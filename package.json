@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jtannerist/Tasklist.git"
+    "url": "git+https://github.com/RachelUberti/TaskList.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jtannerist/Tasklist/issues"
+    "url": "https://github.com/RachelUberti/TaskList/issues"
   },
-  "homepage": "https://github.com/jtannerist/Tasklist#readme",
+  "homepage": "https://github.com/RachelUberti/TaskList#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
   },
