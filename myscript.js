@@ -505,27 +505,30 @@ dateElement.innerHTML = today.toLocaleDateString("en-US", options);
 // START: CALCULATOR HIDE & APPEAR FUNCTION
 let calc = document.querySelector("#calc-contain");
 calc.style.display = "none";
+let calcLink = document.querySelector("#calcLink");
 
-function calcAppear() {
+calcLink.onclick = function () {
   // alert("calc");
   if (calc.style.display === "none") {
     calc.style.display = "block";
   } else {
     calc.style.display = "none";
   }
-}
+};
+
 // END: CALCULATOR HIDE & APPEAR FUNCTION
 
 // START: SECOND LIST HIDE & APPEAR FUNCTION
 let second = document.querySelector("#secondList");
 second.style.display = "none";
+let addNewListBtn = document.querySelector("#addNewListBtn");
 
-function secListAppear() {
+addNewListBtn.onclick = function () {
   // alert("list");
   if (second.style.display === "none") {
     second.style.display = "block";
   } else {
     second.style.display = "none";
   }
-}
+};
 // END: SECOND LIST HIDE & APPEAR FUNCTION

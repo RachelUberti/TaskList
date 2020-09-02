@@ -43,9 +43,38 @@
 }
 /* --- END NAVBAR --- */
 
+/* --- ADD NEW LIST --- */
+
+#newListFormInput {
+  text-align: left;
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.125) !important;
+  font-weight: bold;
+  padding: 17px 20px;
+}
+
+#addNewListBtn {
+  background: rgba(209, 126, 30, 0.795);
+  border: none;
+  color: rgb(83, 83, 83);
+  font-size: 20px;
+}
+
+#faplus {
+  font-size: 16px;
+  color: rgb(83, 83, 83);
+  padding-right: 10px;
+}
+
+/* --- END ADD NEW LIST --- */
+
 /* --- CARDS --- */
 
-#listTitle {
+#listTitle,
+#listTitle2 {
   text-align: left;
   border: none;
   color: rgb(83, 83, 83);
@@ -60,11 +89,37 @@
   float: left;
 }
 
+#newListHtml {
+  max-width: 370px;
+}
+
+#sortTasks,
+#sortTasks2 {
+  text-align: left;
+  border: none;
+  color: rgb(83, 83, 83);
+  border-radius: 0;
+  font-size: 14px;
+  padding: 10px 10px 10px 30px;
+}
+
+#sortTasksDropdown,
+#sortTasksDropdown2 {
+  text-align: left;
+  border-color: rgba(0, 0, 0, 0.125);
+  color: rgb(83, 83, 83);
+  border-radius: 1px;
+  font-size: 14px;
+}
+
 #taskCard {
   border: none;
   padding: 2px;
 }
 
+#taskRow {
+  padding-right: 0px !important;
+}
 .cardTask {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -72,7 +127,9 @@
 }
 
 #addTaskBugSm,
-#addTaskBugLg {
+#addTaskBugLg,
+#addTaskBugSm2,
+#addTaskBugLg2 {
   background: rgba(189, 93, 157, 0.753);
   border: none;
   color: rgb(83, 83, 83);
@@ -91,35 +148,6 @@
 .btn.trash {
   background: rgb(158, 155, 155);
   border: none;
-}
-
-#newListFormInput {
-  text-align: left;
-  border: none;
-  border-radius: 0.25rem;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  background-color: rgba(0, 0, 0, 0.125) !important;
-  font-weight: bold;
-  padding: 20px;
-}
-
-#addNewListBtn {
-  background: rgba(209, 126, 30, 0.795);
-  border: none;
-  color: rgb(83, 83, 83);
-  font-size: 20px;
-  padding: 3px 12px;
-}
-
-.fa-plus {
-  padding-left: 10px;
-  color: black;
-}
-
-#faplus {
-  font-size: 16px;
-  color: rgb(83, 83, 83);
 }
 
 /* --- END CARDS --- */
@@ -173,6 +201,59 @@
 }
 
 /* --- END VALIDATION MESSGAE STYLING --- */
+
+/* --- CALCULATOR --- */
+
+#calc-contain {
+  float: right;
+  width: 230px;
+  border: 2px solid black;
+  border-radius: 12px;
+  background-color: #5ec9b4d7;
+  margin: 0px auto;
+  padding: 10px 10px 10px 15px;
+  margin: 40px 15px;
+}
+
+#calculator {
+  color: #6080bd;
+  font-weight: bold;
+  padding: 5px 0px 0px 13px;
+}
+.calcButton {
+  background: rgba(141, 141, 141, 0.705);
+  width: 17%;
+  color: rgb(63, 62, 62);
+  font-size: 18px;
+  font-weight: 900;
+  border-radius: 7px;
+  margin-left: 9px;
+  margin-top: 8px;
+}
+
+.calcButton:active {
+  transform: translateY(4px);
+}
+
+.calcButton:hover {
+  background-color: #7591c5d7;
+  color: rgb(63, 62, 62);
+}
+
+#calcInput {
+  position: relative;
+  display: block;
+  background-color: #7591c5d7;
+  width: 88%;
+  margin: 5px auto;
+  color: rgb(83, 83, 83);
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  box-shadow: 4px 0px 8px black inset;
+}
+
+/* --- END CALCULATOR --- */
 
 /* --- FOOTER --- */
 
@@ -334,6 +415,10 @@ section {
   float: right;
 }
 
+#contactUsSend {
+  font-size: 0.85rem;
+}
+
 /* If you don't want the footer to be responsive, remove these media queries */
 
 @media (max-width: 1000px) {
@@ -352,6 +437,19 @@ section {
 
   .footer-distributed form button {
     padding: 8px 35px;
+  }
+
+  .card-deck {
+    padding-left: 55px;
+  }
+
+  #calc-contain {
+    float: right;
+    max-width: 300px;
+  }
+
+  #taskRow {
+    max-height: 3px;
   }
 }
 
@@ -381,6 +479,19 @@ section {
 
   .footer-distributed form button {
     float: none;
+  }
+
+  .card-deck {
+    padding-left: 15px;
+  }
+
+  #calc-contain {
+    float: left;
+    margin: 20px 0px 40px 85px;
+  }
+
+  #taskRow {
+    max-height: 3px;
   }
 }
 /* --- END FOOTER --- */

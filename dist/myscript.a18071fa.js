@@ -174,32 +174,32 @@ var TaskList = /*#__PURE__*/function () {
 
   }, {
     key: "updateTask",
-    value: function updateTask(id, name, description, assignee, status, date) {
+    value: function updateTask(id, name, assignee, status, description, date) {
       // alert("in class update");
       var updated_id = "";
 
-      for (var _i = 0; _i < this.tasks.length; _i++) {
-        if (this.tasks[_i].id == id) {
+      for (var i = 0; i < this.tasks.length; i++) {
+        if (this.tasks[i].id == id) {
           // alert("update if");
-          this.tasks[_i].taskName = name;
-          this.tasks[_i].description = description;
-          this.tasks[_i].assignee = assignee;
-          this.tasks[_i].status = status;
-          this.tasks[_i].dueDate = date;
+          this.tasks[i].taskName = name;
+          this.tasks[i].assignee = assignee;
+          this.tasks[i].status = status;
+          this.tasks[i].description = description;
+          this.tasks[i].dueDate = date;
           updated_id = id;
         }
       }
 
       var mynewtasks = JSON.parse(localStorage.getItem("mytasks"));
 
-      for (var _i2 = 0; _i2 < mynewtasks.length; _i2++) {
-        if (mynewtasks[_i2].id == id) {
+      for (var _i = 0; _i < mynewtasks.length; _i++) {
+        if (mynewtasks[_i].id == id) {
           //update in local storage
-          mynewtasks[_i2].taskName = name;
-          mynewtasks[_i2].description = description;
-          mynewtasks[_i2].assignee = assignee;
-          mynewtasks[_i2].status = status;
-          mynewtasks[_i2].dueDate = date;
+          mynewtasks[_i].taskName = name;
+          mynewtasks[_i].assignee = assignee;
+          mynewtasks[_i].status = status;
+          mynewtasks[_i].description = description;
+          mynewtasks[_i].dueDate = date;
           localStorage.setItem("mytasks", JSON.stringify(mynewtasks)); // alert("edit local");
 
           break;
@@ -211,9 +211,9 @@ var TaskList = /*#__PURE__*/function () {
   }, {
     key: "deleteTask",
     value: function deleteTask(id) {
-      for (var _i3 = 0; _i3 < this.tasks.length; _i3++) {
-        if (this.tasks[_i3].id == id) {
-          this.tasks.splice(_i3, 1);
+      for (var i = 0; i < this.tasks.length; i++) {
+        if (this.tasks[i].id == id) {
+          this.tasks.splice(i, 1);
           break;
         }
       } //local storage
@@ -221,10 +221,10 @@ var TaskList = /*#__PURE__*/function () {
 
       var mynewtasks = JSON.parse(localStorage.getItem("mytasks"));
 
-      for (var _i4 = 0; _i4 < mynewtasks.length; _i4++) {
-        if (mynewtasks[_i4].id == id) {
+      for (var _i2 = 0; _i2 < mynewtasks.length; _i2++) {
+        if (mynewtasks[_i2].id == id) {
           // delete from local storage
-          mynewtasks.splice(_i4, 1);
+          mynewtasks.splice(_i2, 1);
           localStorage.setItem("mytasks", JSON.stringify(mynewtasks));
           break;
         }
@@ -235,7 +235,7 @@ var TaskList = /*#__PURE__*/function () {
     key: "displayTask",
     value: function displayTask() {
       // Use for loop to run through the array
-      for (i = 0; i < this.tasks.length; i++) {// "i" doesn't mean anything, it is just good practise for the variable name in a for loop. Arrays all start at 0 (even though we think of it as book "1").
+      for (var i = 0; i < this.tasks.length; i++) {// "i" doesn't mean anything, it is just good practise for the variable name in a for loop. Arrays all start at 0 (even though we think of it as book "1").
         // It finishes the loop when gets to the end of the objects held in the array, ie. end of the tasks. And tasks can keep getting added and this loop will run until it goes through all tasks because of the length parameter (this.tasks.length)
         //if you add .xxx, Eg.(this.tasks[i].taskName) it would return all the task names of the task list
       } // Test: console.log(this.tasks[i]);
@@ -250,44 +250,49 @@ var taskList = new TaskList(); // Creates an instance of class BookList. Sets ta
 // test -->console.log(bookList.books);
 // taskList.displayTask(); invoking the function of displaying contents of the array. taskList previously set as a variable that holds a function to create a new Task list.
 // END: CREATE NEW TASK //
-// START: ADD OBJECT TO ARRAY - adding a new task //
-// Display tasks
 
-function addTaskToWebpage() {
-  var listOfCards = document.querySelector("#listOfCards");
-  var displayHtml = taskList.displayListHtml();
-  var range = document.createRange();
-  var documentFragment = range.createContextualFragment(displayHtml); // attach delete event listener
+sortTasksDropdown = document.querySelector("#sortTasksDropdown");
+var sortTasksDropdownValue = sortTasksDropdown.value;
 
-  documentFragment.querySelector("button.delete").addEventListener("click", deleteTask);
-  documentFragment.querySelector("button.edit").addEventListener("click", openEditModal);
-  listOfCards.appendChild(documentFragment);
-} // END: ADD OBJECT TO ARRAY - adding a new task //
-// START: DISPLAY TASKS FROM STORAGE ON WEB PAGE LOAD //
+sortTasksDropdown.onchange = function () {
+  // alert(sortTasksDropdown.value);
+  sortTasksDropdownValue = sortTasksDropdown.value; //alert(`new tfiler ${taskFilterValue}`);
+
+  displayAllTasksFromStorage(sortTasksDropdownValue);
+}; // START: DISPLAY TASKS FROM STORAGE ON WEB PAGE LOAD.. //
 
 
-displayAllTasksFromStorage(); // Display all task froms storage
+displayAllTasksFromStorage(sortTasksDropdownValue); // Display all task froms storage
 
-function displayAllTasksFromStorage() {
+function displayAllTasksFromStorage(sortTasksDropdownValue) {
+  var tSortValue = sortTasksDropdownValue || "To-Do";
   var mynewtasks = JSON.parse(window.localStorage.getItem("mytasks")) || taskList.tasks;
   var displayAllHtml = "";
+  var formatdate;
+  var datearr;
 
   if (mynewtasks) {
     listOfCards.innerHTML = "";
 
-    for (var _i5 = 0; _i5 < mynewtasks.length; _i5++) {
-      displayAllHtml = "<div id=\"taskRow_".concat(mynewtasks[_i5].id, "\" class=\"row cardTask mx-0 my-1 \">\n<div class=\"col-sm-8 pl-0 pr-3\">     \n<li class=\"list-group-item\" id=\"taskCard\">").concat(mynewtasks[_i5].taskName, "\n<div id=\"demo_").concat(mynewtasks[_i5].id, "\" class=\"collapse\">\n  <ul style=\"list-style-type:disc;\">\n  <li>Assignee: ").concat(mynewtasks[_i5].assignee, "</li>\n  <li>Status: ").concat(mynewtasks[_i5].status, "</li>\n  <li>Description: ").concat(mynewtasks[_i5].description, "</li>\n  <li>Due: ").concat(mynewtasks[_i5].dueDate, "</li>\n  </ul>\n</div> \n</div>\n<div class=\"taskBox col-sm-4 pr-0 pl-0\">\n<span class=\"pull-right\">          \n<button type=\"button\" class=\"btn view btn-sm\" data-toggle=\"collapse\" data-target=\"#demo_").concat(mynewtasks[_i5].id, "\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>\n<button id=\"edit_").concat(mynewtasks[_i5].id, "\" type=\"button\" class=\"btn edit btn-sm\" data-toggle=\"modal\" data-target=\"#modalEdit\"><i class=\"fa fa-pencil\"></i>\n</button> \n<button id=\"delete_").concat(mynewtasks[_i5].id, "\" type=\"button\" class=\"delete btn trash btn-sm\" data-toggle=\"modal\" data-target=\"#modalDelete\"><i class=\"fa fa-trash\"></i></button>\n</button>\n</span>  \n</li> \n</div>\n</div> ");
+    for (var i = 0; i < mynewtasks.length; i++) {
+      if (mynewtasks[i].status.match(tSortValue)) {
+        datearr = mynewtasks[i].dueDate.split("-"); // splits the date into an array
 
-      var _listOfCards = document.querySelector("#listOfCards");
+        formatdate = "".concat(datearr[2], "-").concat(datearr[1], "-").concat(datearr[0]); // re-arranges the array to show date first, then month and then year
 
-      var range = document.createRange();
-      var documentFragment = range.createContextualFragment(displayAllHtml); // local storage attach delete event listener
+        displayAllHtml = "<div id=\"taskRow_".concat(mynewtasks[i].id, "\" class=\"row cardTask mx-0 my-1 \">\n<div id=\"taskRow\" class=\"col-sm-8 pl-0 pr-3\">     \n<li class=\"list-group-item\" id=\"taskCard\">").concat(mynewtasks[i].taskName, "\n<div id=\"demo_").concat(mynewtasks[i].id, "\" class=\"collapse\">\n  <ul style=\"list-style-type:disc;\">\n  <li>Assignee: ").concat(mynewtasks[i].assignee, "</li>\n  <li>Status: ").concat(mynewtasks[i].status, "</li>\n  <li>Description: ").concat(mynewtasks[i].description, "</li>\n  <li>Due: ").concat(formatdate, "</li>\n  </ul>\n</div> \n</div>\n<div class=\"taskBox col-sm-4 pr-0 pl-0\">\n<span class=\"pull-right\">          \n<button type=\"button\" class=\"btn view btn-sm\" data-toggle=\"collapse\" data-target=\"#demo_").concat(mynewtasks[i].id, "\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>\n<button id=\"edit_").concat(mynewtasks[i].id, "\" type=\"button\" class=\"btn edit btn-sm\" data-toggle=\"modal\" data-target=\"#modalEdit\"><i class=\"fa fa-pencil\"></i>\n</button> \n<button id=\"delete_").concat(mynewtasks[i].id, "\" type=\"button\" class=\"delete btn trash btn-sm\" data-toggle=\"modal\" data-target=\"#modalDelete\"><i class=\"fa fa-trash\"></i></button>\n</button>\n</span>  \n</li> \n</div>\n</div> ");
 
-      documentFragment.querySelector("button.delete").addEventListener("click", deleteTask); // local storage attach edit event listener
+        var _listOfCards = document.querySelector("#listOfCards");
 
-      documentFragment.querySelector("button.edit").addEventListener("click", openEditModal);
+        var range = document.createRange();
+        var documentFragment = range.createContextualFragment(displayAllHtml); // local storage attach delete event listener
 
-      _listOfCards.appendChild(documentFragment);
+        documentFragment.querySelector("button.delete").addEventListener("click", deleteTask); // local storage attach edit event listener
+
+        documentFragment.querySelector("button.edit").addEventListener("click", openEditModal);
+
+        _listOfCards.appendChild(documentFragment);
+      }
     }
   }
 } // END: DISPLAY TASKS FROM STORAGE ON WEB PAGE LOAD //
@@ -304,14 +309,15 @@ function openEditModal() {
   document.querySelector("#editTaskId").value = retreiveId;
   var taskArr = JSON.parse(localStorage.getItem("mytasks")) || taskList.tasks;
 
-  for (i = 0; i <= taskArr.length; i++) {
+  for (var i = 0; i <= taskArr.length; i++) {
     // alert("in for");
     if (taskArr[i].id == retreiveId) {
       // alert("in edit");
       document.querySelector("#editTaskName").value = taskArr[i].taskName;
-      document.querySelector("#editTaskDescription").value = taskArr[i].description;
       document.querySelector("#editAssignee").value = taskArr[i].assignee;
-      document.querySelector("#dueDate").value = taskArr[i].dueDate;
+      document.querySelector("#editTaskStatus").value = taskArr[i].status;
+      document.querySelector("#editTaskDescription").value = taskArr[i].description;
+      document.querySelector("#editDueDate").value = taskArr[i].dueDate;
       break;
     }
   }
@@ -358,11 +364,11 @@ btnEditUpdate.onclick = function () {
 
     var editTaskId = document.querySelector("#editTaskId"); // alert("after edit task");
 
-    var u_id = taskList.updateTask(editTaskId.value, editTaskName.value, editTaskDescription.value, editAssignee.value, editTaskStatus.value, editDueDate.value);
+    var u_id = taskList.updateTask(editTaskId.value, editTaskName.value, editAssignee.value, editTaskStatus.value, editTaskDescription.value, editDueDate.value);
     $("#modalEdit").modal("hide"); // hides the modal once data filled out
     // displayUpdatedTask(u_id);
 
-    displayAllTasksFromStorage();
+    displayAllTasksFromStorage(sortTasksDropdownValue);
   }
 }; // Edit Task Name on change validation
 
@@ -417,12 +423,8 @@ function deleteTask() {
   var retreiveId = delIdArr[1]; // alert(retreiveId);
 
   taskList.deleteTask(retreiveId); // alert("d");
-  // Delete the list row from the ul
-  // let task_row = `#taskRow_${retreiveId}`;
-  // var tRow = document.querySelector(task_row);
-  // tRow.parentNode.removeChild(tRow);
 
-  displayAllTasksFromStorage();
+  displayAllTasksFromStorage(sortTasksDropdownValue);
 } // END: DELETE TASK //
 // START: ADD TASK VALIDATION //
 // Set variables
@@ -467,7 +469,7 @@ btnAddTaskSave.onclick = function () {
     $("#modalAdd").modal("hide"); // hides the modal once data filled out
     // addTaskToWebpage(); //called the display function (from function addTaskToWebpage() {)
 
-    displayAllTasksFromStorage();
+    displayAllTasksFromStorage(sortTasksDropdownValue);
   }
 }; // Once validation alerts users something is wrong, this changes feedback on a change of input
 //Task Name on change validation
@@ -515,7 +517,7 @@ taskDescription.onchange = function () {
 
 var addTaskBug = document.querySelectorAll("button.addTaskBug"); // alert(addTaskBug);
 
-for (i = 0; i < addTaskBug.length; i++) {
+for (var i = 0; i < addTaskBug.length; i++) {
   addTaskBug[i].onclick = function () {
     $("#modalAdd").modal("show"); //function to show the Modal at Add
 
@@ -528,6 +530,7 @@ function clearAllFields() {
   // alert(taskName);
   taskName.value = null;
   assignee.value = null;
+  taskStatus.value = "To-do";
   taskDescription.value = null;
   dueDate.value = null;
   taskNameErrMsg.innerHTML = "";
@@ -536,23 +539,18 @@ function clearAllFields() {
   taskName.style.borderColor = "#ced4da";
   assignee.style.borderColor = "#ced4da";
   taskDescription.style.borderColor = "#ced4da";
-  taskStatus.value = selected;
 } // END: CLEAR FIELDS //
 // START: STORE LIST TITLE //
 // declare variable
 
 
 var listTitle = document.querySelector("#listTitle"); // declare variable for title entered by user
-// let listTitleVal =
-// JSON.parse(localStorage.getItem("listTitle")) ||
-// document.querySelector("#listTitle").value;
 
 document.querySelector("#listTitle").value = JSON.parse(localStorage.getItem("listTitle")); // alert(document.querySelector("#listTitle").value);
 // Invoke function when value changed to either retrieve from local storage or add new
 
 listTitle.onchange = function () {
-  localStorage.setItem("listTitle", JSON.stringify(document.querySelector("#listTitle").value)); // localStorage.setItem("listTitle", JSON.stringify(listTitleVal));
-  // alert(document.querySelector("#listTitle").value);
+  localStorage.setItem("listTitle", JSON.stringify(document.querySelector("#listTitle").value)); // alert(document.querySelector("#listTitle").value);
 }; // END: STORE LIST TITLE //
 // START: SHOW TODAY's DATE IN NAVBAR //
 
@@ -565,6 +563,35 @@ var options = {
 };
 var today = new Date();
 dateElement.innerHTML = today.toLocaleDateString("en-US", options); // END: SHOW TODAY's DATE IN NAVBAR //
+// START: CALCULATOR HIDE & APPEAR FUNCTION
+
+var calc = document.querySelector("#calc-contain");
+calc.style.display = "none";
+var calcLink = document.querySelector("#calcLink");
+
+calcLink.onclick = function () {
+  // alert("calc");
+  if (calc.style.display === "none") {
+    calc.style.display = "block";
+  } else {
+    calc.style.display = "none";
+  }
+}; // END: CALCULATOR HIDE & APPEAR FUNCTION
+// START: SECOND LIST HIDE & APPEAR FUNCTION
+
+
+var second = document.querySelector("#secondList");
+second.style.display = "none";
+var addNewListBtn = document.querySelector("#addNewListBtn");
+
+addNewListBtn.onclick = function () {
+  // alert("list");
+  if (second.style.display === "none") {
+    second.style.display = "block";
+  } else {
+    second.style.display = "none";
+  }
+}; // END: SECOND LIST HIDE & APPEAR FUNCTION
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -593,7 +620,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59554" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65522" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
