@@ -73,7 +73,8 @@
 
 /* --- CARDS --- */
 
-#listTitle {
+#listTitle,
+#listTitle2 {
   text-align: left;
   border: none;
   color: rgb(83, 83, 83);
@@ -92,7 +93,8 @@
   max-width: 370px;
 }
 
-#sortTasks {
+#sortTasks,
+#sortTasks2 {
   text-align: left;
   border: none;
   color: rgb(83, 83, 83);
@@ -101,7 +103,8 @@
   padding: 10px 10px 10px 30px;
 }
 
-#sortTasksDropdown {
+#sortTasksDropdown,
+#sortTasksDropdown2 {
   text-align: left;
   border-color: rgba(0, 0, 0, 0.125);
   color: rgb(83, 83, 83);
@@ -124,7 +127,9 @@
 }
 
 #addTaskBugSm,
-#addTaskBugLg {
+#addTaskBugLg,
+#addTaskBugSm2,
+#addTaskBugLg2 {
   background: rgba(189, 93, 157, 0.753);
   border: none;
   color: rgb(83, 83, 83);
